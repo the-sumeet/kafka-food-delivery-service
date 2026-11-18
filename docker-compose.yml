@@ -6,10 +6,10 @@ services:
       - "9092:9092"   # for apps running on your laptop (host)
     environment:
       # KRaft mode: this one node is both broker and controller (no ZooKeeper)
-      KAFKA_NODE_ID: 1
-      KAFKA_PROCESS_ROLES: broker,controller
-      KAFKA_CONTROLLER_QUORUM_VOTERS: 1@kafka:9093
-      KAFKA_CONTROLLER_LISTENER_NAMES: CONTROLLER
+      KAFKA_NODE_ID: 1 # A unique ID for this node in the cluster. We have one node, so it's 1.
+      KAFKA_PROCESS_ROLES: broker,controller # The jobs this node does
+      KAFKA_CONTROLLER_QUORUM_VOTERS: 1@kafka:9093 # The list of controller nodes, written as id@host:port. Here, node 1 at host kafka on port 9093.
+      KAFKA_CONTROLLER_LISTENER_NAMES: CONTROLLER # Which listener (defined below) is used for controller traffic.
 
       # Three listeners: controller (internal), INTERNAL (other containers), EXTERNAL (your laptop)
       KAFKA_LISTENERS: CONTROLLER://:9093,INTERNAL://:29092,EXTERNAL://:9092
